@@ -1,92 +1,100 @@
+
+import { lazy, Suspense } from "react";
 import "./Hero.css";
-import HeroScene from "../components3d/HeroScene";
+
+// Load the Three.js scene separately so the initial page bundle stays smaller.
+const HeroScene = lazy(() => import("../components3d/HeroScene"));
 
 function Hero() {
-
   return (
-
-    <main className="hero" id="home">
-
+    <section className="hero" id="home">
       <div className="hero-content">
-
-        <div className="eyebrow">
-          AYURVEDIC WELLNESS • MASSAGE • BALANCE
+        <div className="hero-eyebrow">
+          <span className="hero-eyebrow-line" />
+          <span>AUTHENTIC AYURVEDIC WELLNESS</span>
         </div>
 
-        <h1>
-          Restore
-          <span>Your Natural Balance</span>
+        <h1 className="hero-title">
+          Restore Your
+          <br />
+          <span>Natural Balance.</span>
         </h1>
 
-        <p>
-          Discover a peaceful Ayurvedic experience
-          designed to relax your body, calm your mind,
-          and reconnect you with natural wellness.
+        <p className="hero-description">
+          Reconnect with yourself through traditional Ayurvedic
+          therapies, calming massage rituals, and a more balanced
+          approach to everyday wellness.
         </p>
 
         <div className="hero-actions">
-
-          <a
-            href="#services"
-            className="primary-button"
-          >
-            Explore Services
-            <span>↗</span>
+          <a className="hero-button hero-button-primary" href="#booking">
+            Book Your Session
+            <span aria-hidden="true"> ↗</span>
           </a>
 
-          <a
-            href="#booking"
-            className="secondary-button"
-          >
-            Book Appointment
+          <a className="hero-button hero-button-secondary" href="#services">
+            Explore Treatments
+            <span aria-hidden="true"> ↓</span>
           </a>
-
         </div>
 
-        <div className="hero-info">
-
-          <div>
-            <strong>01</strong>
-            <span>Traditional<br />Ayurveda</span>
+        <div className="hero-highlights">
+          <div className="hero-highlight">
+            <span className="hero-highlight-icon" aria-hidden="true">
+              ✧
+            </span>
+            <div>
+              <strong>Traditional Care</strong>
+              <span>Ayurvedic-inspired therapies</span>
+            </div>
           </div>
 
-          <div>
-            <strong>02</strong>
-            <span>Personalized<br />Therapies</span>
+          <div className="hero-highlight">
+            <span className="hero-highlight-icon" aria-hidden="true">
+              ◌
+            </span>
+            <div>
+              <strong>Peaceful Experience</strong>
+              <span>Time to relax and recharge</span>
+            </div>
           </div>
-
-          <div>
-            <strong>03</strong>
-            <span>Peaceful<br />Experience</span>
-          </div>
-
         </div>
-
       </div>
 
+      <div className="hero-visual" aria-label="Ayurvedic wellness 3D visual">
+        <div className="hero-visual-glow" />
 
-      <div className="hero-visual">
-
-        <HeroScene />
-
-        <div className="visual-label">
-          <span></span>
-          NATURAL WELLNESS
+        <div className="hero-scene">
+          <Suspense fallback={<div className="hero-scene-fallback" aria-label="Loading 3D wellness visual" />}>
+            <HeroScene />
+          </Suspense>
         </div>
 
+        <div className="hero-floating-card">
+          <span className="hero-floating-icon" aria-hidden="true">
+            ✿
+          </span>
+          <div>
+            <strong>Find Your Balance</strong>
+            <span>Mind · Body · Well-being</span>
+          </div>
+        </div>
+
+        <div className="hero-visual-caption">
+          <span className="hero-caption-dot" />
+          A MOMENT FOR YOURSELF
+        </div>
       </div>
 
-
-      <div className="scroll-indicator">
-
+      <a
+        className="hero-scroll"
+        href="#services"
+        aria-label="Scroll to explore treatments"
+      >
+        <span className="hero-scroll-line" />
         <span>SCROLL TO EXPLORE</span>
-
-        <div className="scroll-line"></div>
-
-      </div>
-
-    </main>
-
+      </a>
+    </section>
   );
 }
 

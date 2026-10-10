@@ -99,7 +99,7 @@ function Scene() {
         position: [0, 0, 7],
         fov: 45,
       }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
     >
 
       {/* Base lighting */}
@@ -129,7 +129,7 @@ function Scene() {
 
       {/* Background particles */}
       <Sparkles
-        count={80}
+        count={55}
         scale={7}
         size={2}
         speed={0.3}
@@ -146,16 +146,8 @@ function Scene() {
 
 function HeroScene() {
   return (
-    <div className="hero-scene">
-
+    <div className="hero-scene-canvas">
       <Scene />
-
-      {/* HTML label over the 3D scene */}
-      <div className="visual-label">
-        <span></span>
-        NATURAL WELLNESS
-      </div>
-
     </div>
   );
 }
