@@ -1,3 +1,5 @@
+/* Tridosha Ayurvedic Massage Center — Services section
+   Visual polish only: existing class names and booking functionality are preserved. */
 
 .services-section {
   --wellness-bg: #0b1710;
@@ -5,87 +7,160 @@
   --wellness-gold: #d3bd7d;
   --wellness-text: #f4f0e5;
   --wellness-muted: #b5c0b4;
-  background: var(--wellness-bg);
+  --wellness-line: rgba(211, 189, 125, 0.2);
+
+  position: relative;
+  overflow: hidden;
+  padding: clamp(64px, 8vw, 104px) 24px;
+  background:
+    radial-gradient(ellipse at 8% 10%, rgba(211, 189, 125, 0.075), transparent 32%),
+    radial-gradient(ellipse at 92% 42%, rgba(46, 91, 59, 0.13), transparent 34%),
+    var(--wellness-bg);
   color: var(--wellness-text);
-  padding: 100px 24px;
   scroll-margin-top: 80px;
 }
 
 .services-container {
-  width: min(1120px, 100%);
+  width: min(1160px, 100%);
   margin: 0 auto;
 }
 
 .section-heading {
-  max-width: 700px;
-  margin: 0 auto 48px;
+  max-width: 720px;
+  margin: 0 auto clamp(34px, 5vw, 54px);
   text-align: center;
 }
 
 .eyebrow {
+  display: inline-block;
   color: var(--wellness-gold);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2.8px;
+  line-height: 1.6;
+  text-transform: uppercase;
 }
 
 .section-heading h2,
 .booking-intro h2 {
-  margin: 16px 0;
+  margin: 14px 0 16px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: clamp(32px, 4.5vw, 52px);
   font-weight: 400;
-  line-height: 1.15;
+  letter-spacing: -0.8px;
+  line-height: 1.12;
+  text-wrap: balance;
 }
 
 .section-heading > p,
 .booking-intro > p {
+  max-width: 620px;
+  margin: 0 auto;
   color: var(--wellness-muted);
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.85;
 }
 
 .treatment-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  align-items: stretch;
+  gap: 22px;
 }
 
 .treatment-card {
+  position: relative;
   display: flex;
-  flex-direction: column;
   min-width: 0;
-  padding: 28px;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 0 22px;
   border: 1px solid rgba(211, 189, 125, 0.17);
-  border-radius: 18px;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.035),
-    rgba(255, 255, 255, 0.008)
-  );
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease;
+  border-radius: 20px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012) 70%);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease, background-color 240ms ease;
 }
 
 .treatment-card:hover,
 .treatment-card.selected {
-  transform: translateY(-4px);
-  border-color: rgba(211, 189, 125, 0.65);
+  transform: translateY(-5px);
+  border-color: rgba(211, 189, 125, 0.62);
   background-color: var(--wellness-card);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(211, 189, 125, 0.04);
+}
+
+.treatment-image-wrap {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1b3023, #263c2b);
+}
+
+.treatment-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.82) brightness(0.86);
+  transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 300ms ease;
+}
+
+.treatment-card:hover .treatment-image,
+.treatment-card.selected .treatment-image {
+  transform: scale(1.055);
+  filter: saturate(1) brightness(0.98);
+}
+
+.treatment-image-fallback {
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(211, 189, 125, 0.14), transparent 48%),
+    linear-gradient(135deg, #1b3023, #263c2b);
+  color: var(--wellness-gold);
+}
+
+.treatment-image-fallback span {
+  font-size: 38px;
+  opacity: 0.85;
+}
+
+.treatment-image-badge {
+  position: absolute;
+  right: 13px;
+  bottom: 13px;
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(9, 24, 15, 0.82);
+  color: #f6efd9;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(8px);
 }
 
 .treatment-icon {
   display: grid;
-  width: 52px;
-  height: 52px;
-  margin-bottom: 22px;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  margin: 19px 22px 13px;
   place-items: center;
-  border: 1px solid rgba(211, 189, 125, 0.3);
+  border: 1px solid rgba(211, 189, 125, 0.32);
   border-radius: 50%;
   background: rgba(211, 189, 125, 0.08);
-  font-size: 25px;
+  font-size: 20px;
+}
+
+.treatment-card-heading,
+.treatment-card > .treatment-duration,
+.treatment-card > .treatment-description,
+.treatment-card > .treatment-button {
+  margin-right: 22px;
+  margin-left: 22px;
 }
 
 .treatment-card-heading {
@@ -93,33 +168,39 @@
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: 8px 12px;
 }
 
 .treatment-card h3 {
-  margin: 0;
-  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--wellness-text);
+  font-size: 16px;
   font-weight: 600;
+  line-height: 1.45;
 }
 
 .treatment-price {
   color: var(--wellness-gold);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .treatment-duration {
-  margin: 10px 0;
+  margin-top: 8px;
+  margin-bottom: 0;
   color: var(--wellness-gold);
-  font-size: 12px;
-  letter-spacing: 0.5px;
+  font-size: 11px;
+  letter-spacing: 0.45px;
 }
 
 .treatment-description {
   flex: 1;
-  margin: 8px 0 24px;
+  margin-top: 11px;
+  margin-bottom: 22px;
   color: var(--wellness-muted);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.8;
 }
 
@@ -128,86 +209,148 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  width: 100%;
+  width: auto;
   padding: 13px 0 0;
   border: 0;
-  border-top: 1px solid rgba(211, 189, 125, 0.2);
+  border-top: 1px solid var(--wellness-line);
   background: transparent;
   color: var(--wellness-text);
   cursor: pointer;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 600;
   text-align: left;
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease;
 }
 
 .treatment-button span {
   color: var(--wellness-gold);
   font-size: 18px;
+  transition: transform 180ms ease;
+}
+
+.treatment-button:hover {
+  color: var(--wellness-gold);
+  border-color: rgba(211, 189, 125, 0.55);
+}
+
+.treatment-button:hover span {
+  transform: translate(2px, -2px);
+}
+
+.treatment-button:focus-visible,
+.booking-submit:focus-visible {
+  outline: 2px solid var(--wellness-gold);
+  outline-offset: 4px;
 }
 
 .booking-panel {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 48px;
-  margin-top: 80px;
-  padding: clamp(24px, 5vw, 52px);
-  border: 1px solid rgba(211, 189, 125, 0.25);
-  border-radius: 22px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: start;
+  gap: clamp(28px, 5vw, 58px);
+  margin-top: clamp(54px, 8vw, 82px);
+  padding: clamp(24px, 4.5vw, 52px);
+  border: 1px solid rgba(211, 189, 125, 0.27);
+  border-radius: 24px;
   background:
-    radial-gradient(
-      circle at top left,
-      rgba(211, 189, 125, 0.09),
-      transparent 60%
-    ),
-    #101f16;
+    radial-gradient(circle at top left, rgba(211, 189, 125, 0.09), transparent 52%),
+    linear-gradient(135deg, rgba(18, 34, 25, 0.98), rgba(12, 26, 18, 0.98));
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.17);
   scroll-margin-top: 100px;
 }
 
 .booking-intro h2 {
-  font-size: clamp(30px, 4vw, 42px);
+  font-size: clamp(30px, 3.8vw, 43px);
+}
+
+.booking-intro > p {
+  margin: 0;
+  font-size: 13px;
 }
 
 .selected-treatment {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
-  margin-top: 32px;
-  padding: 20px 0;
-  border-top: 1px solid rgba(211, 189, 125, 0.22);
-  border-bottom: 1px solid rgba(211, 189, 125, 0.22);
+  margin-top: 28px;
+  padding: 18px 0;
+  border-top: 1px solid var(--wellness-line);
+  border-bottom: 1px solid var(--wellness-line);
 }
 
-.selected-treatment-icon {
-  font-size: 34px;
+.selected-treatment-feature {
+  align-items: stretch;
+}
+
+.selected-treatment-image {
+  display: block;
+  width: 112px;
+  min-width: 112px;
+  min-height: 140px;
+  align-self: stretch;
+  border-radius: 12px;
+  background: #1b3023;
+  object-fit: cover;
+}
+
+.selected-treatment-copy {
+  min-width: 0;
+  flex: 1;
 }
 
 .selected-label {
   color: var(--wellness-gold);
-  font-size: 10px;
-  letter-spacing: 1.5px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.35px;
+  line-height: 1.6;
 }
 
 .selected-treatment h3 {
-  margin: 8px 0;
-  font-size: 17px;
+  margin: 7px 0 8px;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 .selected-treatment p {
   margin: 0;
   color: var(--wellness-muted);
-  font-size: 13px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.selected-treatment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 13px;
+  font-size: 11px;
+}
+
+.selected-treatment-meta span {
+  color: var(--wellness-muted);
+}
+
+.selected-treatment-meta strong {
+  color: var(--wellness-gold);
+  font-size: 14px;
 }
 
 .booking-form {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .booking-form label {
-  margin-top: 8px;
+  margin-top: 7px;
   color: var(--wellness-text);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -221,17 +364,19 @@
   border: 1px solid rgba(211, 189, 125, 0.22);
   border-radius: 9px;
   outline: none;
-  background: #0b1710;
+  background: rgba(7, 18, 11, 0.76);
   color: var(--wellness-text);
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .booking-form input:focus,
 .booking-form select:focus,
 .booking-form textarea:focus {
   border-color: var(--wellness-gold);
-  box-shadow: 0 0 0 2px rgba(211, 189, 125, 0.1);
+  background: rgba(7, 18, 11, 0.96);
+  box-shadow: 0 0 0 3px rgba(211, 189, 125, 0.1);
 }
 
 .booking-form input::placeholder,
@@ -239,138 +384,97 @@
   color: #819083;
 }
 
+.booking-form textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
 .booking-field-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 12px;
 }
 
 .booking-field-row > div {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
   min-width: 0;
+  flex-direction: column;
+  gap: 9px;
 }
 
 .booking-submit {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   margin-top: 12px;
-  padding: 16px 18px;
-  border: 0;
-  border-radius: 9px;
-  background: var(--wellness-gold);
+  padding: 15px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #d9c68d, #c6ad68);
   color: #152016;
   cursor: pointer;
   font: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
+  font-size: 12px;
+  font-weight: 750;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.booking-submit:hover {
+.booking-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  background: #e3d09a;
+  box-shadow: 0 9px 24px rgba(211, 189, 125, 0.16);
+  background: linear-gradient(135deg, #e5d39b, #d3bd7d);
+}
+
+.booking-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
 
 .booking-disclaimer {
   margin: 4px 0 0;
   color: var(--wellness-muted);
-  font-size: 11px;
-  line-height: 1.6;
+  font-size: 10px;
+  line-height: 1.7;
   text-align: center;
 }
 
-@media (max-width: 900px) {
-  .treatment-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .booking-panel {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-}
-
-@media (max-width: 560px) {
-  .services-section {
-    padding: 68px 16px;
-  }
-
-  .section-heading {
-    margin-bottom: 32px;
-  }
-
-  .treatment-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .treatment-card {
-    padding: 23px;
-  }
-
-  .booking-panel {
-    margin-top: 48px;
-    padding: 22px 16px;
-    border-radius: 16px;
-  }
-
-  .booking-field-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .booking-submit {
-    line-height: 1.5;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .treatment-card,
-  .booking-submit {
-    transition: none;
-  }
-
-  .treatment-card:hover,
-  .booking-submit:hover {
-    transform: none;
-  }
+.booking-error {
+  margin: 7px 0;
+  padding: 11px 12px;
+  border: 1px solid rgba(238, 125, 112, 0.35);
+  border-radius: 8px;
+  background: rgba(140, 38, 31, 0.13);
+  color: #ffb5a9;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .booking-success {
-  max-width: 650px;
+  max-width: 680px;
   margin: 36px auto 0;
   padding: clamp(24px, 5vw, 42px);
   border: 1px solid rgba(211, 189, 125, 0.5);
-  border-radius: 18px;
+  border-radius: 20px;
   background:
-    radial-gradient(
-      circle at top,
-      rgba(211, 189, 125, 0.12),
-      transparent 65%
-    ),
+    radial-gradient(circle at top, rgba(211, 189, 125, 0.12), transparent 65%),
     #122219;
-  color: #f4f0e5;
+  color: var(--wellness-text);
   text-align: center;
   scroll-margin-top: 100px;
-  animation: booking-success-appear 0.35s ease-out;
+  animation: booking-success-appear 350ms ease-out;
 }
 
 .success-icon {
   display: grid;
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 22px;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 20px;
   place-items: center;
   border-radius: 50%;
-  background: #d3bd7d;
+  background: var(--wellness-gold);
   color: #102016;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
 }
 
@@ -382,14 +486,15 @@
 }
 
 .booking-success .success-message {
-  color: #b5c0b4;
-  line-height: 1.7;
+  color: var(--wellness-muted);
+  font-size: 13px;
+  line-height: 1.75;
 }
 
 .confirmation-details {
   margin: 26px 0;
   padding: 8px 18px;
-  border: 1px solid rgba(211, 189, 125, 0.2);
+  border: 1px solid var(--wellness-line);
   border-radius: 12px;
   text-align: left;
 }
@@ -399,10 +504,10 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
-  padding: 12px 0;
   margin: 0;
+  padding: 12px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .confirmation-details p:last-child {
@@ -410,23 +515,24 @@
 }
 
 .confirmation-details span {
-  color: #b5c0b4;
+  color: var(--wellness-muted);
 }
 
 .confirmation-details strong {
-  text-align: right;
+  max-width: 65%;
   overflow-wrap: anywhere;
+  text-align: right;
 }
 
 .booking-success .success-note {
-  color: #b5c0b4;
-  font-size: 12px;
+  color: var(--wellness-muted);
+  font-size: 11px;
   line-height: 1.8;
 }
 
 .confirmation-button {
-  max-width: 260px;
-  margin: 22px auto 0;
+  max-width: 280px;
+  margin: 20px auto 0;
   padding: 14px 0;
 }
 
@@ -441,123 +547,128 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 980px) {
+  .treatment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-panel {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .booking-intro > p {
+    max-width: 650px;
+    margin-left: 0;
+  }
+
+  .selected-treatment {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-section {
+    padding: 64px 15px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(30px, 9vw, 39px);
+  }
+
+  .section-heading > p,
+  .booking-intro > p {
+    font-size: 13px;
+  }
+
+  .treatment-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .treatment-card {
+    border-radius: 17px;
+  }
+
+  .treatment-image-wrap {
+    height: clamp(190px, 56vw, 245px);
+  }
+
+  .treatment-icon {
+    margin: 16px 18px 12px;
+  }
+
+  .treatment-card-heading,
+  .treatment-card > .treatment-duration,
+  .treatment-card > .treatment-description,
+  .treatment-card > .treatment-button {
+    margin-right: 18px;
+    margin-left: 18px;
+  }
+
+  .treatment-card h3 {
+    font-size: 16px;
+  }
+
+  .booking-panel {
+    gap: 24px;
+    margin-top: 48px;
+    padding: 23px 17px;
+    border-radius: 18px;
+  }
+
+  .selected-treatment {
+    gap: 12px;
+  }
+
+  .selected-treatment-image {
+    width: 94px;
+    min-width: 94px;
+    min-height: 130px;
+  }
+
+  .booking-field-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .booking-submit {
+    line-height: 1.5;
+  }
+
   .confirmation-details {
-    padding: 8px 12px;
+    padding: 7px 12px;
   }
 
   .confirmation-details p {
     gap: 12px;
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .treatment-card,
+  .treatment-image,
+  .treatment-button,
+  .treatment-button span,
+  .booking-form input,
+  .booking-form select,
+  .booking-form textarea,
+  .booking-submit {
+    transition: none;
+  }
+
+  .treatment-card:hover,
+  .treatment-card.selected,
+  .booking-submit:hover {
+    transform: none;
+  }
+
   .booking-success {
     animation: none;
   }
-}
-
-/* Premium image-led treatment cards */
-.treatment-card {
-  overflow: hidden;
-  padding: 0 0 24px;
-  border-radius: 20px;
-}
-.treatment-image-wrap {
-  position: relative;
-  height: 205px;
-  overflow: hidden;
-  background: #1b3023;
-}
-.treatment-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(.2,.7,.2,1), filter .3s ease;
-  filter: saturate(.82) brightness(.86);
-}
-.treatment-card:hover .treatment-image,
-.treatment-card.selected .treatment-image {
-  transform: scale(1.06);
-  filter: saturate(1) brightness(.98);
-}
-.treatment-image-badge {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  padding: 7px 11px;
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 999px;
-  background: rgba(9, 24, 15, .82);
-  color: #f6efd9;
-  font-size: 11px;
-  backdrop-filter: blur(8px);
-}
-.treatment-card > .treatment-icon,
-.treatment-card > .treatment-card-heading,
-.treatment-card > .treatment-duration,
-.treatment-card > .treatment-description,
-.treatment-card > .treatment-button {
-  margin-left: 22px;
-  margin-right: 22px;
-}
-.treatment-card > .treatment-icon {
-  width: 42px;
-  height: 42px;
-  margin-top: 18px;
-  margin-bottom: 15px;
-  font-size: 21px;
-}
-.treatment-card-heading { align-items: flex-start; }
-.treatment-card h3 { max-width: 70%; line-height: 1.45; }
-.treatment-description { line-height: 1.75; }
-.treatment-button {
-  width: calc(100% - 44px);
-  margin-top: auto;
-  padding-top: 15px;
-}
-.selected-treatment-feature {
-  display: block;
-  overflow: hidden;
-  padding: 0;
-  border: 1px solid rgba(211,189,125,.28);
-  border-radius: 16px;
-}
-.selected-treatment-feature > img {
-  display: block;
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-.selected-treatment-copy { padding: 20px; }
-.selected-treatment-copy h3 { margin: 9px 0; font-size: 20px; }
-.selected-treatment-copy > p { color: var(--wellness-muted); font-size: 13px; line-height: 1.7; }
-.selected-treatment-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 18px;
-  padding-top: 15px;
-  border-top: 1px solid rgba(211,189,125,.2);
-  color: var(--wellness-muted);
-  font-size: 12px;
-}
-.selected-treatment-meta strong { color: var(--wellness-gold); font-size: 21px; }
-@media (max-width: 900px) {
-  .treatment-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .booking-panel { grid-template-columns: 1fr; gap: 28px; }
-}
-@media (max-width: 560px) {
-  .services-section { padding: 70px 16px; }
-  .treatment-grid { grid-template-columns: 1fr; gap: 16px; }
-  .treatment-image-wrap { height: 220px; }
-  .treatment-card > .treatment-card-heading { align-items: baseline; }
-  .booking-field-row { grid-template-columns: 1fr; }
-  .selected-treatment-feature > img { height: 200px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .treatment-image { transition: none; }
 }

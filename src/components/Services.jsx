@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "./Services.css";
 import { supabase } from "../lib/supabase";
@@ -13,7 +12,8 @@ const treatments = [
     price: 1800,
     icon: "🌿",
     image: "/treatments/AYN_Pinda-Swedana.jpg",
-    description: "A traditional warming therapy using herbal boluses and rhythmic massage techniques."
+    description:
+      "A traditional warming therapy using herbal boluses and rhythmic massage techniques.",
   },
   {
     name: "Head Massage",
@@ -21,7 +21,8 @@ const treatments = [
     price: 600,
     icon: "✨",
     image: "/treatments/headmassage.jpg",
-    description: "A calming scalp and head massage created for a peaceful pause in your day."
+    description:
+      "A calming scalp and head massage created for a peaceful pause in your day.",
   },
   {
     name: "Foot Massage",
@@ -29,7 +30,8 @@ const treatments = [
     price: 700,
     icon: "🪴",
     image: "/treatments/footrelexology.jpg",
-    description: "Gentle, soothing massage focused on tired feet and everyday relaxation."
+    description:
+      "Gentle, soothing massage focused on tired feet and everyday relaxation.",
   },
   {
     name: "Foot Reflexology",
@@ -37,15 +39,18 @@ const treatments = [
     price: 800,
     icon: "🌸",
     image: "/treatments/footmassage.jpg",
-    description: "A focused foot treatment using pressure-point techniques in a tranquil setting."
+    description:
+      "A focused foot treatment using pressure-point techniques in a tranquil setting.",
   },
   {
     name: "Back Massage",
     duration: "30 minutes",
     price: 700,
     icon: "🍃",
-    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=85",
-    description: "A restorative massage concentrating on the back and areas that feel tight."
+    image:
+      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=85",
+    description:
+      "A restorative massage concentrating on the back and areas that feel tight.",
   },
   {
     name: "Neck & Shoulder Massage",
@@ -53,7 +58,8 @@ const treatments = [
     price: 700,
     icon: "🪷",
     image: "/treatments/neck.jpg",
-    description: "A relaxing, focused treatment for the neck and shoulders after a busy day."
+    description:
+      "A relaxing, focused treatment for the neck and shoulders after a busy day.",
   },
   {
     name: "Hot Oil Massage",
@@ -61,15 +67,18 @@ const treatments = [
     price: 1000,
     icon: "🫧",
     image: "/treatments/hot-oil-massage.jpg",
-    description: "Warm massage oils and flowing movements create a comforting wellness ritual."
+    description:
+      "Warm massage oils and flowing movements create a comforting wellness ritual.",
   },
   {
     name: "Deep Tissue Massage",
     duration: "60 minutes",
     price: 1500,
     icon: "💆",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=85",
-    description: "A firmer, targeted massage for areas of muscular tension. Pressure can be discussed with your therapist."
+    image:
+      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=85",
+    description:
+      "A firmer, targeted massage for areas of muscular tension. Pressure can be discussed with your therapist.",
   },
   {
     name: "Herbal Powder Massage (Udvartana)",
@@ -77,7 +86,8 @@ const treatments = [
     price: 1800,
     icon: "🌱",
     image: "/treatments/herbal.jpg",
-    description: "An Ayurvedic-inspired body treatment using herbal powders and traditional massage strokes."
+    description:
+      "An Ayurvedic-inspired body treatment using herbal powders and traditional massage strokes.",
   },
   {
     name: "Aromatherapy Massage",
@@ -85,7 +95,8 @@ const treatments = [
     price: 1500,
     icon: "🌼",
     image: "/treatments/aromatherapy.jpg",
-    description: "A sensory massage experience with aromatic oils and a calm, unhurried atmosphere."
+    description:
+      "A sensory massage experience with aromatic oils and a calm, unhurried atmosphere.",
   },
   {
     name: "Abhiynga Massage",
@@ -93,9 +104,11 @@ const treatments = [
     price: 1800,
     icon: "🌿",
     image: "/treatments/Abhyanga.jpg",
-    description: "A traditional full-body Ayurvedic oil massage designed around a soothing wellness experience."
+    description:
+      "A traditional full-body Ayurvedic oil massage designed around a soothing wellness experience.",
   },
 ];
+
 const formatPrice = (price) =>
   new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -122,6 +135,33 @@ function getWhatsAppUrl(booking) {
   ].join("\n");
 
   return `https://wa.me/${MANAGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+}
+
+// Keeps the layout intact if an image is missing or fails to load.
+function TreatmentImage({ src, alt, className, loading = "lazy" }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div
+        className={`${className || ""} treatment-image-fallback`}
+        role="img"
+        aria-label={`${alt}. Image unavailable.`}
+      >
+        <span aria-hidden="true">🌿</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      className={className}
+      src={src}
+      alt={alt}
+      loading={loading}
+      onError={() => setHasError(true)}
+    />
+  );
 }
 
 function Services() {
@@ -185,14 +225,10 @@ function Services() {
       notes: cleanNotes,
     };
 
-    // Prepare the message before saving, but do not navigate to WhatsApp
-    // until Supabase confirms that the booking was saved.
     const whatsappUrl = getWhatsAppUrl(booking);
-
-    // Opening a blank tab during the form's click event helps avoid
-    // popup blockers that can block windows opened after an async request.
     let whatsappWindow = null;
 
+    // Open a tab during the submit event to reduce popup-blocker issues.
     try {
       whatsappWindow = window.open("about:blank", "_blank");
 
@@ -252,7 +288,7 @@ function Services() {
       setBookingTime("");
       setNotes("");
 
-      // Navigate only after Supabase successfully saves the booking.
+      // Open WhatsApp only after Supabase confirms the save.
       if (whatsappWindow && !whatsappWindow.closed) {
         whatsappWindow.location.href = whatsappUrl;
         setWhatsappNotice(
@@ -280,6 +316,17 @@ function Services() {
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  function selectTreatment(treatment) {
+    setSelected(treatment);
+    setSubmittedBooking(null);
+    setFormError("");
+    setWhatsappNotice("");
+
+    document
+      .getElementById("booking")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function bookAnotherAppointment() {
@@ -313,14 +360,14 @@ function Services() {
               key={treatment.name}
             >
               <div className="treatment-image-wrap">
-                <img
+                <TreatmentImage
                   className="treatment-image"
                   src={treatment.image}
                   alt={`${treatment.name} wellness treatment`}
-                  loading="lazy"
-                  onError={(event) => { event.currentTarget.style.display = "none"; }}
                 />
-                <span className="treatment-image-badge">{treatment.duration}</span>
+                <span className="treatment-image-badge">
+                  {treatment.duration}
+                </span>
               </div>
 
               <div className="treatment-icon" aria-hidden="true">
@@ -340,15 +387,7 @@ function Services() {
               <button
                 className="treatment-button"
                 type="button"
-                onClick={() => {
-                  setSelected(treatment);
-                  setSubmittedBooking(null);
-                  setFormError("");
-                  setWhatsappNotice("");
-                  document
-                    .getElementById("booking")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={() => selectTreatment(treatment)}
               >
                 Select treatment <span aria-hidden="true">↗</span>
               </button>
@@ -361,14 +400,20 @@ function Services() {
             <span className="eyebrow">TAKE A MOMENT FOR YOURSELF</span>
             <h2>Book your wellness visit.</h2>
             <p>
-              Choose your treatment and preferred appointment details using
-              the form. We will review your request and confirm availability.
+              Choose your treatment and preferred appointment details using the
+              form. We will review your request and confirm availability.
             </p>
 
             <div className="selected-treatment selected-treatment-feature">
-              <img src={selected.image} alt={`${selected.name} selected treatment`} loading="lazy" />
+              <TreatmentImage
+                className="selected-treatment-image"
+                src={selected.image}
+                alt={`${selected.name} selected treatment`}
+              />
               <div className="selected-treatment-copy">
-                <span className="selected-label">YOUR SELECTED TREATMENT</span>
+                <span className="selected-label">
+                  YOUR SELECTED TREATMENT
+                </span>
                 <h3>{selected.name}</h3>
                 <p>{selected.description}</p>
                 <div className="selected-treatment-meta">
@@ -451,9 +496,7 @@ function Services() {
               </div>
             </div>
 
-            <label htmlFor="booking-notes">
-              Additional notes (optional)
-            </label>
+            <label htmlFor="booking-notes">Additional notes (optional)</label>
             <textarea
               id="booking-notes"
               name="notes"
